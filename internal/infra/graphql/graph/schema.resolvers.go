@@ -7,7 +7,7 @@ package graph
 import (
 	"context"
 
-	"github.com/ryancarlos88/clean-arch/internal/infra/graph/model"
+	"github.com/ryancarlos88/clean-arch/internal/infra/graphql/graph/model"
 	"github.com/ryancarlos88/clean-arch/internal/usecase"
 )
 

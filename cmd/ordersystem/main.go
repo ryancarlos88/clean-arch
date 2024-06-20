@@ -10,7 +10,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/ryancarlos88/clean-arch/configs"
 	"github.com/ryancarlos88/clean-arch/internal/event/handler"
-	"github.com/ryancarlos88/clean-arch/internal/infra/graph"
+	"github.com/ryancarlos88/clean-arch/internal/infra/graphql/graph"
 	"github.com/ryancarlos88/clean-arch/internal/infra/grpc/pb"
 	"github.com/ryancarlos88/clean-arch/internal/infra/grpc/service"
 	"github.com/ryancarlos88/clean-arch/internal/infra/web/webserver"
@@ -53,8 +53,8 @@ func main() {
 	go webserver.Start()
 
 	grpcServer := grpc.NewServer()
-	createOrderService := service.NewOrderService(*createOrderUseCase)
-	pb.RegisterOrderServiceServer(grpcServer, createOrderService)
+	orderService := service.NewOrderService(*createOrderUseCase, *listOrdersUseCase)
+	pb.RegisterOrderServiceServer(grpcServer, orderService)
 	reflection.Register(grpcServer)
 
 	fmt.Println("Starting gRPC server on port", configs.GRPCServerPort)
